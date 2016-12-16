@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ebay.Stoker.WebApp.Models.SellerSerchModel>
+﻿@model Ebay.Stoker.WebApp.Models.SellerSerchModel
 
 @{
     ViewBag.Title = "View";
@@ -17,8 +17,9 @@
         <div class="form-group">
 
             <div class="row">
-                <input type="text" name="daterange" />
-
+                @*<input id="daterange" name="daterange" />*@
+                @Html.TextBoxFor(m=>m.startdate, new { @class = "date" })
+                @Html.TextBoxFor(m => m.endDate, new { @class = "date" })
             </div>
             <div class="row">
 
@@ -75,6 +76,18 @@
 <script type="text/javascript">
 
 $(function() {
-    $('input[name="daterange"]').daterangepicker();
+
+    $('input.date').daterangepicker(
+    {
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+   
+    },
+    function (start, end, label) {
+        
+        $('input[name="startdate"]').val(start.format('DD-MM-YYYY'));
+        $('input[name="endDate"]').val(end.format('DD-MM-YYYY'));
+    });
 });
 </script>
