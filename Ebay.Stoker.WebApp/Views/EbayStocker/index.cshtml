@@ -13,19 +13,20 @@
 <div class="container">
 
 
-    <form class="form-group" role="form">
+    <form class="form-group" role="form" action="@Url.Action("Index")" method="get">
         <div class="form-group">
 
             <div class="row">
-                @*<input id="daterange" name="daterange" />*@
-                @Html.TextBoxFor(m=>m.startdate, new { @class = "date" })
-                @Html.TextBoxFor(m => m.endDate, new { @class = "date" })
+                <input id="daterange" name="daterange" class="date"/>
+                @Html.HiddenFor(m=>m.startdate)
+                @Html.HiddenFor(m => m.endDate)
             </div>
             <div class="row">
 
-                <label class="control-label" for="exampleInputEmail1">Enter Sellerid</label>
-                <input class="form-control" id="exampleInputEmail1"
-                       placeholder="Sellerid" type="text">
+                <label class="control-label" for="sellerName">Enter Sellerid</label>
+               @Html.TextBoxFor(m => m.sellerName , new { @class = "form-control" })
+                 @*<input class="form-control" id="exampleInputEmail1"
+                       placeholder="Sellerid" type="text">*@
 
             </div>
         </div>
