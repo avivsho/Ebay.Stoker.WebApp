@@ -1,9 +1,9 @@
-﻿@model Ebay.Stoker.WebApp.Models.SellerSerchModel
+﻿@using eBay.Service.Core.Soap;
+@model Ebay.Stoker.WebApp.Models.SellerSerchModel
 
 @{
     ViewBag.Title = "View";
 }
-
 <h2>View</h2>
 
 <h3>Stoker Application</h3>
@@ -38,39 +38,30 @@
     </form>
 </div>
 
-
+ @if (Model.sellerlist != null && Model.sellerlist.Count > 0)
+     {
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <ul class="media-list">
+                @foreach (ItemType item in Model.sellerlist)
+                {
                 <li class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                    <a class="pull-left" href=@item.PictureDetails.GalleryURL><img class="media-object" src=@item.PictureDetails.GalleryURL height="64" width="64"></a>
                     <div class="media-body">
-                        <h4 class="media-heading">Media heading</h4>
+                        <h4 class="media-heading"> @item.Title;</h4>
                         <p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                            ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                            tempus viverra turpis.
+                           
                         </p>
                     </div>
                 </li>
-                <li class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Media heading</h4>
-                        <p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                            ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                            tempus viverra turpis.
-                        </p>
-                    </div>
-                </li>
+                }
             </ul>
         </div>
     </div>
 </div>
 
-
+                }
 
 
 
@@ -87,8 +78,8 @@ $(function() {
     },
     function (start, end, label) {
         
-        $('input[name="startdate"]').val(start.format('DD-MM-YYYY'));
-        $('input[name="endDate"]').val(end.format('DD-MM-YYYY'));
+        $('input[name="startdate"]').val(start.format('MM-DD-YYYY'));
+        $('input[name="endDate"]').val(end.format('MM-DD-YYYY'));
     });
 });
 </script>

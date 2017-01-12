@@ -18,15 +18,33 @@ namespace Ebay.Stoker.WebApp.Controllers
         [HttpGet]
         public ActionResult Index(SellerSerchModel  serch) 
         {
-            //ApiContext apiContext = GetApiContext();
-            //GetSellerListCall apicall = new GetSellerListCall(apiContext);
-            //apicall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
-            ////Pagination is required
-            //apicall.Pagination = new PaginationType();
-            //apicall.Pagination.PageNumber = 1;
-            //apicall.Pagination.EntriesPerPage = 200;
-            //apicall.UserID = serch.sellerName;
-            return View(serch);
+            try
+            {
+            
+
+                ApiContext apiContext = GetApiContext();
+                GetSellerListCall apicall = new GetSellerListCall(apiContext);
+                apicall.DetailLevelList.Add(DetailLevelCodeType.ReturnAll);
+                ////Pagination is required
+                apicall.Pagination = new PaginationType();
+                apicall.Pagination.PageNumber = 1;
+                apicall.Pagination.EntriesPerPage = 200;
+                if (serch.sellerName != null)
+                {
+
+                    apicall.UserID = serch.sellerName;
+                    serch.endDate.GetDateTimeFormats();
+                    apicall.StartTimeFilter = new TimeFilter(serch.startdate, serch.endDate);
+                    serch.sellerlist = apicall.GetSellerList();
+                }
+                return View(serch);
+            }
+          
+            
+             catch (Exception ex)
+            {
+               throw ;
+            }
         }
         /// <summary>
         /// Populate eBay SDK ApiContext object with data from application configuration file
