@@ -17,7 +17,7 @@
         <div class="form-group">
 
             <div class="row">
-                <input id="daterange" name="daterange" class="date"/>
+                <input id="daterange" name="daterange" class="date form-control"/>
                 @Html.HiddenFor(m=>m.startdate)
                 @Html.HiddenFor(m => m.endDate)
             </div>
@@ -25,8 +25,7 @@
 
                 <label class="control-label" for="sellerName">Enter Sellerid</label>
                @Html.TextBoxFor(m => m.sellerName , new { @class = "form-control" })
-                 @*<input class="form-control" id="exampleInputEmail1"
-                       placeholder="Sellerid" type="text">*@
+          
 
             </div>
         </div>
@@ -40,7 +39,40 @@
 
  @if (Model.sellerlist != null && Model.sellerlist.Count > 0)
      {
-<div class="container">
+
+
+    <table class="table-condensed">
+        <thead  class="thead-inverse">
+            <tr>
+                <th>  </th>
+                <th>Title</th>
+                <th>id</th>
+                <th  data-sortable="true">Whatching</th>
+                <th data-sortable="true">Quantity Sold</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ItemType item in Model.sellerlist)
+            {
+               <tr>
+                   <td><a class="pull-left" href=@item.PictureDetails.GalleryURL><img class="media-object" src=@item.PictureDetails.GalleryURL height="64" width="64"></td>
+                   <td>@item.Title </td>
+                   <td>@item.ItemID</td>
+                   <td>@item.WatchCount</td>
+                   <td>@item.SellingStatus.QuantitySold</td>
+                   <td>@item.Quantity</td>
+
+               </tr>
+  
+            }
+         </tbody>
+
+
+          
+        
+</table>
+@*<div class="container">
     <div class="row">
         <div class="col-md-12">
             <ul class="media-list">
@@ -50,16 +82,14 @@
                     <a class="pull-left" href=@item.PictureDetails.GalleryURL><img class="media-object" src=@item.PictureDetails.GalleryURL height="64" width="64"></a>
                     <div class="media-body">
                         <h4 class="media-heading"> @item.Title;</h4>
-                        <p>
-                           
-                        </p>
+                        
                     </div>
                 </li>
                 }
             </ul>
         </div>
     </div>
-</div>
+</div>*@
 
                 }
 
